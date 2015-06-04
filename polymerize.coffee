@@ -100,6 +100,16 @@ class Bower
         mainFiles = overrides[name].main
       else  
         mainFiles = dependency_bower.json.main
+
+        # if the main entry is empty
+        unless mainFiles
+          fileName = name + '.html'
+          if dependency_bower.getFile(path.join(directory, name, fileName))
+            mainFiles = fileName 
+
+        # If the main entry is not an array.
+        unless _.isArray(mainFiles)
+          mainFiles = [mainFiles]
       
       _.each mainFiles, (file) ->
         if path.extname(file) is '.html'
