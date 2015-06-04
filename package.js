@@ -1,6 +1,6 @@
 Package.describe({
   name: 'loneleeandroo:polymerize',
-  version: '0.1.1',
+  version: '0.1.0',
   summary: 'Synthesises Polymer and Meteor',
   git: 'git@github.com:loneleeandroo/meteor-polymerize.git',
   documentation: 'README.md'
