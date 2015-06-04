@@ -109,14 +109,14 @@ class Bower
 
         # If the main entry is not an array.
         unless _.isArray(mainFiles)
-          mainFiles = [mainFiles]
+          mainFiles = [mainFiles]  
       
       _.each mainFiles, (file) ->
         if path.extname(file) is '.html'
           imports.push({
             directory: name
             file: file
-          })
+          })    
 
     return imports
       
