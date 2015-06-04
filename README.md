@@ -1,6 +1,9 @@
 # Polymerize for Meteor
 Synthesises Polymer and Meteor.
 
+## Warning
+Not production ready. This project is still in prototyping phase. Any API may be subject to change.
+
 ## Install
 You can add Polymerize to your project via:
 ```
@@ -71,3 +74,6 @@ Unfortunately, there is inconsistency with the main entry in many of the polymer
   }
 }
 ```
+
+## Roadmap
+TODO
