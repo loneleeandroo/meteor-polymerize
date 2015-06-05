@@ -12,6 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'coffeescript',
     'underscore',
+    'reactive-var',
     'mquandalle:bower@1.4.1',
     'meteorhacks:inject-initial@1.0.2'
   ]);

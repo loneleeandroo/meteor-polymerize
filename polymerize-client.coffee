@@ -3,17 +3,14 @@
 ##
 Meteor.startup ->
 
-	# Store the Blaze.render function
-	render = Blaze.render
-
-	# Temporarily disable the Blaze.render function
-	Blaze.render = -> return
-
-	# When "WebComponentsReady" is fired
+	# Setup a reactive variable for WebComponents Ready
+	ready = new ReactiveVar false
 	window.addEventListener "WebComponentsReady", ->
+		ready.set true
 
-		# Re-enable the Blaze.render function
-		Blaze.render = render
-
-		# Render Template.body to document
-		Template.body.renderToDocument()
+	# Rerun Blaze.render when WebComponents is ready
+	render = Blaze.render
+	Blaze.render = ->
+		renderArgs = arguments
+		Tracker.autorun =>
+			render.apply(@, renderArgs) if ready.get()
