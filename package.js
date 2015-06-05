@@ -1,6 +1,6 @@
 Package.describe({
   name: 'loneleeandroo:polymerize',
-  version: '0.1.1',
+  version: '0.1.2',
   summary: 'Synthesises Polymer and Meteor',
   git: 'git@github.com:loneleeandroo/meteor-polymerize.git',
   documentation: 'README.md'
@@ -18,7 +18,8 @@ Package.onUse(function(api) {
 
   api.imply('mquandalle:bower@1.4.1')
 
-  api.addFiles('polymerize.coffee', 'server');
+  api.addFiles('polymerize-client.coffee', 'client');
+  api.addFiles('polymerize-server.coffee', 'server');
 });
 
 // TODO: Add Vulcanize to production builds.
