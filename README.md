@@ -1,4 +1,4 @@
-# Polymerize for Meteor
+# Polymerize for Meteor [![Build Status](https://travis-ci.org/loneleeandroo/meteor-polymerize.svg)](https://travis-ci.org/loneleeandroo/meteor-polymerize)
 Synthesises Polymer and Meteor.
 
 ## Warning
