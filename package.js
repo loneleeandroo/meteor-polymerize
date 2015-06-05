@@ -30,10 +30,14 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use([
+    'spacebars',
     'tinytest',
+    'test-helpers',
     'coffeescript',
     'underscore'
   ]);
+
+  api.use('templating', 'client');
 
   api.addFiles([
     'polymerize-tests.coffee',
