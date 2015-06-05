@@ -10,6 +10,7 @@ You can add Polymerize to your project via:
 meteor add loneleeandroo:polymerize
 ```
 #### Comments
+##### <code>bower.json</code> 
 If a <code>bower.json</code> file does not exist in your project root directory, this default <code>bower.json</code> will be created:
 ```
 {
@@ -28,7 +29,7 @@ If a <code>bower.json</code> file does not exist in your project root directory,
   }
 }
 ```
-
+##### <code>.bowerrc</code> 
 If a <code>.bowerrc</code> file does not exist in your project root directory, this default <code>.bowerrc</code> will be created:
 ```
 {
@@ -36,6 +37,10 @@ If a <code>.bowerrc</code> file does not exist in your project root directory, t
 }
 ```
 If you already have a <code>.bowerrc</code>, you will need to change the directory to <code>public/bower_components</code>. This is because the polymer elements requires other files besides the main html import to be available to the client. Currently, placing in the public folder is the most convenient location because it makes files available to the client when building for development and production environments. However, [it may cause longer reload times](https://github.com/meteor/meteor/issues/3373#issuecomment-68172647).
+
+##### Blaze.render
+Some polymer elements, such as <code>iron-icon</code>, requires "WebComponentsReady" to be fired before being rendered properly by Blaze on certain browsers, namely Chrome. So <code>Polymerize</code> will disable the Blaze.render function until after the "WebComponentsReady" event has been fired.
+
 
 ## Usage
 ### Adding Elements
