@@ -6,7 +6,12 @@ Package.describe({
   documentation: 'README.md'
 });
 
-Package.onUse(function(api) {
+// TODO: Add Vulcanize to production builds.
+Npm.depends({
+  vulcanize: "1.8.1"
+});
+
+Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.0');
   
   api.use([
@@ -23,7 +28,14 @@ Package.onUse(function(api) {
   api.addFiles('polymerize-server.coffee', 'server');
 });
 
-// TODO: Add Vulcanize to production builds.
-Npm.depends({
-  vulcanize: "1.8.1"
+Package.onTest(function (api) {
+  api.use([
+    'tinytest',
+    'coffeescript',
+    'underscore'
+  ]);
+
+  api.addFiles([
+    'polymerize-tests.coffee',
+  ], 'server');
 });
