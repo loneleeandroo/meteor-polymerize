@@ -15,11 +15,11 @@ should be able to override any options easily as well.
       - [.bowerrc](#bowerrc)
 - [Usage](#usage)
   - [Adding Elements](#adding-elements)
-    - [Comments](#comments-1)
-      - [Load Order](#load-order)
-      - [Overriding main file](#overriding-main-file)
-      - [Blaze.render](#blazerender)
-      - [Vulcanize](#vulcanize)
+  - [Comments](#comments-1)
+    - [Load Order](#load-order)
+    - [Overriding main file](#overriding-main-file)
+    - [Blaze.render](#blazerender)
+    - [Vulcanize](#vulcanize)
 - [Roadmap](#roadmap)
 
 ## Warning
