@@ -21,7 +21,7 @@ You can add Polymerize to your project via:
 meteor add loneleeandroo:polymerize
 ```
 #### Comments
-##### <code>bower.json</code> 
+##### bower.json
 If a <code>bower.json</code> file does not exist in your project root directory, this default <code>bower.json</code> will be created:
 ```
 {
@@ -40,7 +40,7 @@ If a <code>bower.json</code> file does not exist in your project root directory,
   }
 }
 ```
-##### <code>.bowerrc</code> 
+##### .bowerrc
 If a <code>.bowerrc</code> file does not exist in your project root directory, this default <code>.bowerrc</code> will be created:
 ```
 {
