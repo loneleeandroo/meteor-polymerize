@@ -13,7 +13,7 @@ As of version <code>0.2.0</code>, Polymerize supports the following features:
 * Delays Blaze.render until after WebComponentsReady is fired.
 * Vulcanizing imports when doing a production build or when the environmental variable <code>VULCANIZE</code> is set to true.
 
-## Install
+## Installation
 You can add Polymerize to your project via:
 ```
 meteor add loneleeandroo:polymerize
@@ -101,4 +101,6 @@ VULCANIZE=true meteor
 ```
 
 ## Roadmap
-TODO
+* Write TinyTests for the package.
+* Implement an easy workflow for creating custom elements and using the Polymer API.
+* Look at ways to implement Server Side Rendering for Polymer elements. 
