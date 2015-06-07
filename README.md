@@ -47,6 +47,11 @@ bower install --save PolymerElements/paper-button#^1.0.0
 
 You can browse [the catalog of elements](https://elements.polymer-project.org/) to find the commands for adding the elements you want.
 
+The element will be imported into your project automatically. There is no need to manually add a <code>link</code> import to the <code>head</code> of the document. 
+<code>Polymerize</code> will look at the main entry of the <code>bower.json</code>in the bower component's folder to figure out which HTML file to import. 
+If you need to manually specify which HTML file to import please use the override entry of the <code>bower.json</code> in the root of your project directory. [See comments below](https://github.com/loneleeandroo/meteor-polymerize#overriding-main-file) on how to create an override entry.
+The override entry accepts an array, and will load in the order of the array.
+
 #### Comments
 ##### Load Order
 Elements are imported in the order which they appear in the <code>bower.json</code> dependencies. It is preferrable to leave <code>webcomponentjs</code> and <code>polymer</code> as the first components to load.
