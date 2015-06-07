@@ -4,6 +4,13 @@ Synthesises Polymer and Meteor.
 ## Warning
 Not production ready. This project is still in prototyping phase. Any API may be subject to change.
 
+## Features
+As of version <code>0.2.0</code>, Polymerize supports the following features:
+* Add elements using <code>bower install --save</code>
+* Automatically imports elements based on the main entry of the <code>bower.json</code>
+* Delays Blaze.render until after WebComponentsReady is fired.
+* Vulcanizing imports when doing a production build or when the environmental variable <code>VULCANIZE</code> is set to true.
+
 ## Install
 You can add Polymerize to your project via:
 ```
@@ -83,6 +90,13 @@ Unfortunately, there is inconsistency with the main entry in many of the polymer
 
 ##### Blaze.render
 Some polymer elements, such as <code>iron-icon</code>, requires "WebComponentsReady" to be fired before being rendered properly by Blaze on certain browsers, namely Chrome. So <code>Polymerize</code> will disable the Blaze.render function until after the "WebComponentsReady" event has been fired.
+
+##### Vulcanize
+Polymer elements are automatically vulcanized when building or running your meteor app as production. <code>Polymerize</code> will look at <code>process.env.NODE_ENV</code>. 
+If you want want to vulcanize your elements in development, you can pass the environment variable <code>VULCANIZE</code> before your meteor commands. For example:
+```
+VULCANIZE=true meteor
+```
 
 ## Roadmap
 TODO
