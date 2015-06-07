@@ -2,6 +2,8 @@
 Synthesises Polymer and Meteor.
 
 The purpose of this package is to make it incredibly easy to use Polymer in a Meteor project, as if Polymer was made for Meteor.
+All best practices of integrating Polymer with Meteor should be included as default and require no user action, however the user
+should be able to override any options easily as well.
 
 ## Warning
 Not production ready. This project is still in prototyping phase. Any API may be subject to change.
