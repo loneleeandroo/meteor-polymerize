@@ -142,11 +142,14 @@ class Bower
       # If the main entry has no extension, add .html extension
       mainFiles = _.map mainFiles, (mainFile) ->
         mainFile += '.html' unless path.extname(mainFile)
-        return mainFile
+        return mainFile 
 
       # Check if all main files exists
       hasMainFiles = _.some mainFiles, (mainFile) ->
-        dependency_bower.getFile(path.join(directory, name, mainFile))
+        if dependency_bower.getFile(path.join(directory, name, mainFile))
+          return true
+        else
+          return false  
   
       # No main entry can be derived, add all its dependencies to the bower.json instead.
       unless hasMainFiles    
