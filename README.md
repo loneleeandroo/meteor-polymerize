@@ -37,7 +37,7 @@ You can add Polymerize to your project via:
 ```
 meteor add loneleeandroo:polymerize
 ```
-#### Comments
+### Comments
 ##### bower.json
 If a <code>bower.json</code> file does not exist in your project root directory, this default <code>bower.json</code> will be created:
 ```
@@ -68,6 +68,7 @@ If you already have a <code>.bowerrc</code>, you will need to change the directo
 
 ## Usage
 ### Adding Elements
+#### From bower
 You can add any elements to your project via the <code>bower install --save</code> command. For example:
 ```
 bower install --save PolymerElements/paper-button#^1.0.0
@@ -80,7 +81,13 @@ The element will be imported into your project automatically. There is no need t
 If you need to manually specify which HTML file to import please use the override entry of the <code>bower.json</code> in the root of your project directory. [See comments below](#overriding-main-file) on how to create an override entry.
 The override entry accepts an array, and will load in the order of the array.
 
-#### Comments
+#### From file
+TODO
+
+### Creating Custom Elements
+TODO
+
+### Comments
 ##### Load Order
 Elements are imported in the order which they appear in the <code>bower.json</code> dependencies. It is preferrable to leave <code>webcomponentjs</code> and <code>polymer</code> as the first components to load.
 
