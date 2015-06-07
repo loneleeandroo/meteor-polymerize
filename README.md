@@ -1,6 +1,8 @@
 # Polymerize for Meteor [![Build Status](https://travis-ci.org/loneleeandroo/meteor-polymerize.svg)](https://travis-ci.org/loneleeandroo/meteor-polymerize)
 Synthesises Polymer and Meteor.
 
+The purpose of this package is to make it incredibly easy to use Polymer in a Meteor project, as if Polymer was made for Meteor.
+
 ## Warning
 Not production ready. This project is still in prototyping phase. Any API may be subject to change.
 
