@@ -1,5 +1,6 @@
 fs = Npm.require("fs")
 path = Npm.require("path")
+vulcan = Npm.require("vulcanize")
 
 class Bower
   constructor: (@base_path, @isMain = false) ->
@@ -27,6 +28,7 @@ class Bower
   #
   # @params filePath {String}
   # @params encoding {String}
+  # @params initialContent {String}
   ###  
   getFile: (filePath, encoding = @encoding, initialContent) ->
     file = false
@@ -124,6 +126,7 @@ class Polymerizer
   constructor: ->
     @base_path = path.relative(process.cwd(), process.env.PWD)
     @bower = new Bower(@base_path, true)
+    @ENV = process.env
     @dependencies = [
       {
         name: "webcomponentsjs"
@@ -142,12 +145,53 @@ class Polymerizer
   # Initialisation Process
   ###      
   init: ->
-    @importHTML()
+    
+    # Vulcanize if the node environment is 'production' or 
+    # the environment variable VULCANIZE is set to TRUE
+    if @ENV.NODE_ENV is 'production' or @ENV.VULCANIZE
+      htmlImports = @vulcanize()
+    else
+      htmlImports = @getHTMLimports()
+
+    # Insert the import links to the end of the <head> of the document.
+    Meteor.startup ->
+      Inject.rawModHtml 'polymer', (html) ->
+        html = html.replace '</head>', htmlImports + '</head>'
+        
+  ###
+  # Vulcanize all HTML import files.
+  #
+  # @params name {String}
+  # @params options {Object}
+  ###
+  vulcanize: (name = 'vulcanized', options) ->
+    target = path.join(@base_path, 'public', name + '.html')
+    htmlImports = @getHTMLimports()
+    
+    fs.writeFileSync(target, htmlImports, 'utf8')
+    
+    unless options
+      options = {
+        absPath: ''
+        excludes: []
+        stripExcludes: false
+        inlineScripts: true
+        inlineCss: true
+        implicitStrip: false
+        stripComments: false
+      }
+    
+    vulcan.setOptions options
+      
+    vulcan.process target, (error, inlineHTML) ->
+      fs.writeFileSync(target, inlineHTML, 'utf8')
+    
+    return '<link rel="import" href="' + name + '.html">'
     
   ###
-  # Imports all html files in bower
-  ###    
-  importHTML: ->
+  # Get list of HTML import files.
+  ###  
+  getHTMLimports: ->
     dependencies = _.map @dependencies, (dependency) ->
       return dependency.name
       
@@ -160,9 +204,7 @@ class Polymerizer
     _.each htmlImports, (htmlImport) ->
       links += '<link rel="import" href="bower_components/' + htmlImport.directory + '/' + htmlImport.file + '">'
     
-    Meteor.startup ->
-      Inject.rawModHtml 'polymer', (html) ->
-        html = html.replace '</head>', links + '</head>'
+    return links
         
 ###
 # Starts Polymerizer

@@ -6,10 +6,9 @@ Package.describe({
   documentation: 'README.md'
 });
 
-// TODO: Add Vulcanize to production builds.
 Npm.depends({
-  vulcanize: "1.8.1"
-});
+  vulcanize: "1.9.1"
+})
 
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.0');
@@ -18,11 +17,11 @@ Package.onUse(function (api) {
     'coffeescript',
     'underscore',
     'reactive-var',
-    'mquandalle:bower@1.4.1',
-    'meteorhacks:inject-initial@1.0.2'
+    'mquandalle:bower@=1.4.1',
+    'meteorhacks:inject-initial@=1.0.2'
   ]);
 
-  api.imply('mquandalle:bower@1.4.1')
+  api.imply('mquandalle:bower@=1.4.1')
 
   api.addFiles('polymerize-client.coffee', 'client');
   api.addFiles('polymerize-server.coffee', 'server');
