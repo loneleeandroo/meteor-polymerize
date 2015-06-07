@@ -5,6 +5,28 @@ The purpose of this package is to make it incredibly easy to use Polymer in a Me
 All best practices of integrating Polymer with Meteor should be included as default and require no user action, however the user
 should be able to override any options easily as well.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Polymerize for Meteor [![Build Status](https://travis-ci.org/loneleeandroo/meteor-polymerize.svg)](https://travis-ci.org/loneleeandroo/meteor-polymerize)](#polymerize-for-meteor-build-statushttpstravis-ciorgloneleeandroometeor-polymerizesvghttpstravis-ciorgloneleeandroometeor-polymerize)
+  - [Warning](#warning)
+  - [Features](#features)
+  - [Installation](#installation)
+      - [Comments](#comments)
+        - [bower.json](#bowerjson)
+        - [.bowerrc](#bowerrc)
+  - [Usage](#usage)
+    - [Adding Elements](#adding-elements)
+      - [Comments](#comments-1)
+        - [Load Order](#load-order)
+        - [Overriding main file](#overriding-main-file)
+        - [Blaze.render](#blazerender)
+        - [Vulcanize](#vulcanize)
+  - [Roadmap](#roadmap)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Warning
 Not production ready. This project is still in prototyping phase. Any API may be subject to change.
 
