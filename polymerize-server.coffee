@@ -121,6 +121,8 @@ class Bower
   ###  
   getHTMLImports: ->
     directory = path.join(@base_path, @rc.directory)
+    hasDirectory = true
+
     dependencies = @json.dependencies
     overrides = @json.overrides
     imports = []
@@ -149,10 +151,16 @@ class Bower
         if dependency_bower.getFile(path.join(directory, name, mainFile))
           return true
         else
-          return false  
-  
+          return false
+
+      try
+        fs.readdirSync(directory) 
+      catch e 
+        if e.code is 'ENOENT' and e.errno is 34 
+          hasDirectory = false
+    
       # No main entry can be derived, add all its dependencies to the bower.json instead.
-      unless hasMainFiles    
+      if hasDirectory and !hasMainFiles
         newDependencies = []
         _.each dependency_bower.json.dependencies, (dependencyVersion, dependencyName) ->
           newDependencies.push {
@@ -161,6 +169,7 @@ class Bower
           }
 
         @replaceDependency(name, newDependencies)
+        
       
       # Import HTML files only.
       _.each mainFiles, (file) ->
