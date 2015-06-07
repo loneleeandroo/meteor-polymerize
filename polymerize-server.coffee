@@ -40,7 +40,7 @@ class Bower
         @writeFile(filePath, JSON.stringify(initialContent, null, 2), encoding)
         file = fs.readFileSync(filePath, encoding)
       else
-        file = false
+        file = false  
         
     return file  
     
@@ -83,6 +83,36 @@ class Bower
         }
       
     @writeFile(@bower_json_path, JSON.stringify(updatedJson, null, 2))
+
+  ###
+  # Replace dependency with other dependencies from bower
+  #
+  # @params replaceDependency {String}
+  # @params dependencies {Array}
+  ###  
+  replaceDependency: (replaceDependency, dependencies = []) -> 
+    updatedJson = @json
+
+    newDependencies = {}
+
+    updatedJson.dependencies = {} unless updatedJson.dependencies
+    updatedJson.overrides = {} unless updatedJson.overrides
+
+    _.each updatedJson.dependencies, (version, name) ->
+      if name is replaceDependency
+        _.each dependencies, (dependency) ->
+          newDependencies[dependency.name] = dependency.version
+          
+          if dependency.main
+            updatedJson.overrides[dependency.name] = {
+              main: dependency.main
+            }
+      else
+        newDependencies[name] = version
+
+    updatedJson.dependencies = newDependencies  
+      
+    @writeFile(@bower_json_path, JSON.stringify(updatedJson, null, 2))
     
   ###
   # Gets HTML imports. Looks at the main file in a dependencies
@@ -95,7 +125,7 @@ class Bower
     overrides = @json.overrides
     imports = []
     
-    _.each dependencies, (version, name) ->
+    _.each dependencies, (version, name) =>
       dependency_bower = new Bower(path.join(directory, name))
     
       if overrides[name]
@@ -103,16 +133,33 @@ class Bower
       else  
         mainFiles = dependency_bower.json.main
 
-        # if the main entry is empty
-        unless mainFiles
-          fileName = name + '.html'
-          if dependency_bower.getFile(path.join(directory, name, fileName))
-            mainFiles = fileName 
+      # if the main entry is empty
+      mainFiles = name + '.html' unless mainFiles
 
-        # If the main entry is not an array.
-        unless _.isArray(mainFiles)
-          mainFiles = [mainFiles]  
+      # If the main entry is not an array.
+      mainFiles = [mainFiles] unless _.isArray(mainFiles)
+          
+      # If the main entry has no extension, add .html extension
+      mainFiles = _.map mainFiles, (mainFile) ->
+        mainFile += '.html' unless path.extname(mainFile)
+        return mainFile
+
+      # Check if all main files exists
+      hasMainFiles = _.some mainFiles, (mainFile) ->
+        dependency_bower.getFile(path.join(directory, name, mainFile))
+  
+      # No main entry can be derived, add all its dependencies to the bower.json instead.
+      unless hasMainFiles    
+        newDependencies = []
+        _.each dependency_bower.json.dependencies, (dependencyVersion, dependencyName) ->
+          newDependencies.push {
+            name: dependencyName
+            version: dependencyVersion
+          }
+
+        @replaceDependency(name, newDependencies)
       
+      # Import HTML files only.
       _.each mainFiles, (file) ->
         if path.extname(file) is '.html'
           imports.push({
