@@ -147,7 +147,7 @@ class Bower
         return mainFile 
 
       # Check if all main files exists
-      hasMainFiles = _.some mainFiles, (mainFile) ->
+      mainFiles = _.filter mainFiles, (mainFile) ->
         if dependency_bower.getFile(path.join(directory, name, mainFile))
           return true
         else
@@ -160,7 +160,7 @@ class Bower
           hasDirectory = false
     
       # No main entry can be derived, add all its dependencies to the bower.json instead.
-      if hasDirectory and !hasMainFiles
+      if hasDirectory and _.isEmpty(mainFiles)
         newDependencies = []
         _.each dependency_bower.json.dependencies, (dependencyVersion, dependencyName) ->
           newDependencies.push {
@@ -168,8 +168,7 @@ class Bower
             version: dependencyVersion
           }
 
-        @replaceDependency(name, newDependencies)
-        
+        @replaceDependency(name, newDependencies)  
       
       # Import HTML files only.
       _.each mainFiles, (file) ->
