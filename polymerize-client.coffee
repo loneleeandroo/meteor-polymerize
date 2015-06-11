@@ -4,5 +4,5 @@
 ##
 Meteor.startup ->
   window.addEventListener "WebComponentsReady", (e) ->
-    $('[icon]').each (index, icon) ->
+    _.each document.querySelectorAll('[icon]'), (icon) ->
       icon._updateIcon() if typeof icon._updateIcon is 'function'
