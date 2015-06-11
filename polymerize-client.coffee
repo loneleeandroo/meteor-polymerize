@@ -1,16 +1,8 @@
 ##
-# Delay Blaze.render until WebComponentsReady
+# Update Icons when WebComponentsReady
+# See https://github.com/PolymerElements/iron-icons/issues/14
 ##
 Meteor.startup ->
-
-  # Setup a reactive variable for WebComponents Ready
-  ready = new ReactiveVar false
-  window.addEventListener "WebComponentsReady", ->
-    ready.set true
-
-  # Rerun Blaze.render when WebComponents is ready
-  render = Blaze.render
-  Blaze.render = ->
-    renderArgs = arguments
-    Tracker.autorun =>
-      render.apply(@, renderArgs) if ready.get()
+  window.addEventListener "WebComponentsReady", (e) ->
+    $('[icon]').each (index, icon) ->
+      icon._updateIcon() if typeof icon._updateIcon is 'function'
