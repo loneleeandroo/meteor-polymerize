@@ -185,6 +185,11 @@ class Polymerizer
     @base_path = path.relative(process.cwd(), process.env.PWD)
     @bower = new Bower(@base_path, true)
     @ENV = process.env
+
+    @assets = [
+      { name: "patch-dom" }
+    ]
+
     @dependencies = [
       {
         name: "webcomponentsjs"
@@ -198,6 +203,7 @@ class Polymerizer
         version: "Polymer/polymer#^1.0.0"
       }
     ]
+
     
   ###
   # Initialisation Process
@@ -214,7 +220,7 @@ class Polymerizer
     # Insert the import links to the end of the <head> of the document.
     Meteor.startup ->
       Inject.rawModHtml 'polymer', (html) ->
-        html = html.replace '</head>', htmlImports + '<link rel="import" href="packages/loneleeandroo_polymerize/patch-dom.html"></head>'
+        html = html.replace '</head>', htmlImports + '</head>'
         
       Inject.rawModHtml 'addUnresolved', (html) ->
         html = html.replace '<body>', '<body unresolved class="fullbleed layout vertical">' 
@@ -264,6 +270,9 @@ class Polymerizer
     
     _.each htmlImports, (htmlImport) ->
       links += '<link rel="import" href="bower_components/' + htmlImport.directory + '/' + htmlImport.file + '">'
+
+    _.each @assets, (asset) ->
+      links += '<link rel="import" href="packages/loneleeandroo_polymerize/' + asset.name + '.html">'  
     
     return links
         
