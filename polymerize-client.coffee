@@ -11,9 +11,15 @@ Meteor.startup ->
   ready = new ReactiveVar false
   window.addEventListener "WebComponentsReady", ->
     ready.set true
-  
+
   render = Blaze.render
   Blaze.render = ->
     renderArgs = arguments
     Tracker.autorun =>
       render.apply(@, renderArgs) if ready.get()
+
+  destroyNode = Blaze._destroyNode 
+  Blaze._destroyNode = ->
+    node = arguments[0]
+    destroyNode.apply(@, arguments)
+    node.offsetParent.removeChild(node)

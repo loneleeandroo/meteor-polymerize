@@ -216,8 +216,8 @@ class Polymerizer
       Inject.rawModHtml 'polymer', (html) ->
         html = html.replace '</head>', htmlImports + '<link rel="import" href="packages/loneleeandroo_polymerize/patch-dom.html"></head>'
         
-      #Inject.rawModHtml 'addUnresolved', (html) ->
-        #html = html.replace '<body>', '<body unresolved>'    
+      Inject.rawModHtml 'addUnresolved', (html) ->
+        html = html.replace '<body>', '<body unresolved class="fullbleed layout vertical">' 
         
   ###
   # Vulcanize all HTML import files.

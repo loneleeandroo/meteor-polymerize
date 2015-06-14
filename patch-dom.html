@@ -104,7 +104,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     
     patch: function(node) {
       Polymer.telemetry.patched++;
-      log && console.warn('patch node', node);
+      log && console.warn('patch node', node, 'patch');
       if (this.hasPrototypeDescriptors) {
         this.patchPrototype(node);
       } else {
@@ -145,7 +145,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     patchMethod: function(obj, name) {
       var orig = obj[name];
       obj[name] = function() {
-        log && console.log(this, name, arguments);
+        log && console.log(this, name, arguments, 'patchMethod');
         return factory(this)[name].apply(this.__domApi, arguments);
       };
     },
@@ -156,7 +156,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       var info = {
         get: function() {
-          log && console.log(this, name);
+          log && console.log(this, name, 'patchAccessor');
           return factory(this)[name];
         },
         configurable: true
