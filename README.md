@@ -7,10 +7,12 @@ The purpose of this package is to make it incredibly easy to use Polymer in a Me
 Not production ready. This project is still in prototyping phase. Any API may be subject to change.
 
 ## Features
-As of version <code>0.2.5</code>, Polymerize supports the following features:
+As of version <code>0.3.0</code>, Polymerize supports the following features:
 * Add elements using <code>bower install --save</code>
 * Automatically imports elements based on the main entry of the <code>bower.json</code>
 * Vulcanizing imports when doing a production build or when the environmental variable <code>VULCANIZE</code> is set to true.
+* Blaze Compatability. Works with [iron:router](https://github.com/iron-meteor/iron-router).
+* Defers Blaze.Render until after WebComponentsReady so that Polymer icons load correctly.
 
 ## Installation
 You can add Polymerize to your project via:

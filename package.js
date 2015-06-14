@@ -1,6 +1,6 @@
 Package.describe({
   name: 'loneleeandroo:polymerize',
-  version: '0.2.6',
+  version: '0.3.0',
   summary: 'Synthesises Polymer and Meteor',
   git: 'https://github.com/loneleeandroo/meteor-polymerize',
   documentation: 'README.md'
@@ -23,7 +23,11 @@ Package.onUse(function (api) {
 
   api.imply('mquandalle:bower@=1.4.1')
 
-  api.addFiles('polymerize-client.coffee', 'client');
+  api.addFiles([
+    'polymerize-client.coffee',
+    'patch-dom.html'
+  ], 'client');
+  
   api.addFiles('polymerize-server.coffee', 'server');
 });
 
