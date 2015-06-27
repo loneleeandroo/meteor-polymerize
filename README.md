@@ -7,12 +7,13 @@ The purpose of this package is to make it incredibly easy to use Polymer in a Me
 Not production ready. This project is still in prototyping phase. Any API may be subject to change.
 
 ## Features
-As of version <code>0.3.0</code>, Polymerize supports the following features:
+As of version <code>0.4.0</code>, Polymerize supports the following features:
 * Add elements using <code>bower install --save</code>
 * Automatically imports elements based on the main entry of the <code>bower.json</code>
 * Vulcanizing imports when doing a production build or when the environmental variable <code>VULCANIZE</code> is set to true.
 * Blaze Compatability. Works with [iron:router](https://github.com/iron-meteor/iron-router).
 * Defers Blaze.Render until after WebComponentsReady so that Polymer icons load correctly.
+* Uses ShadowDOM rather than ShadyDOM for compatability with Blaze
 
 ## Installation
 You can add Polymerize to your project via:
@@ -37,13 +38,6 @@ If a <code>bower.json</code> file does not exist in your project root directory,
   "dependencies": {
     "webcomponentsjs": "^0.7.2",
     "polymer": "Polymer/polymer#^1.0.0"
-  },
-  "overrides": {
-    "webcomponentsjs": {
-      "main": [
-        "webcomponents-lite.js"
-      ]
-    }
   }
 }
 ```
@@ -89,11 +83,6 @@ Unfortunately, there is inconsistency with the main entry in many of the polymer
     "polymer": "Polymer/polymer#^1.0.0"
   },
   "overrides": {
-    "webcomponentsjs": {
-      "main": [
-        "webcomponents-lite.js"
-      ]
-    },
     "polymer": {
       "main": [
         "polymer-micro.html"
@@ -109,6 +98,9 @@ If you want want to vulcanize your elements in development, you can pass the env
 ```
 VULCANIZE=true meteor
 ```
+
+##### ShadowDOM polyfill
+For compatability with Blaze, it is essential to use the ShadowDOM rather than ShadyDOM to write to the local DOM. Browsers such as Chrome, already have native ShadowDOM support and will render perfectly. On the other hand, browsers such as Safari and Firefox will require the ShadowDOM polyfill, which is not included in <code>webcomponentsjs-lite.js</code>, so you'll need to use the full version instead, which is <code>webcomponentsjs.js</code>.
 
 ## Roadmap
 * Write TinyTests for the package.

@@ -130,7 +130,7 @@ class Bower
     _.each dependencies, (version, name) =>
       dependency_bower = new Bower(path.join(directory, name))
     
-      if overrides[name]
+      if overrides and overrides[name]
         mainFiles = overrides[name].main
       else  
         mainFiles = dependency_bower.json.main
@@ -187,16 +187,13 @@ class Polymerizer
     @ENV = process.env
 
     @assets = [
-      { name: "patch-dom" }
+      # { name: "patch-dom" }
     ]
 
     @dependencies = [
       {
         name: "webcomponentsjs"
         version: "^0.7.2"
-        main: [
-          "webcomponents-lite.js"
-        ]
       }
       {
         name: "polymer"
