@@ -23,7 +23,7 @@ Meteor.startup ->
 
         # Copy all child nodes
         while oldForm.childNodes.length > 0
-          newForm.appendChild form.childNodes[0]
+          newForm.appendChild oldForm.childNodes[0]
 
         # Replace old form with new form
         oldForm.parentNode.replaceChild(newForm, oldForm)  
