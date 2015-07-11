@@ -10,15 +10,15 @@ Meteor.startup ->
   # so that Polymer Icons render correctly
   # See https://github.com/PolymerElements/iron-icons/issues/14
   ##
-  ready = new ReactiveVar false
-  window.addEventListener "WebComponentsReady", ->
-    ready.set true
+  # ready = new ReactiveVar false
+  # window.addEventListener "WebComponentsReady", ->
+  #   ready.set true
 
-  render = Blaze.render
-  Blaze.render = ->
-    renderArgs = arguments
-    Tracker.autorun =>
-      render.apply(@, renderArgs) if ready.get()
+  # render = Blaze.render
+  # Blaze.render = ->
+  #   renderArgs = arguments
+  #   Tracker.autorun =>
+  #     render.apply(@, renderArgs) if ready.get()
               
   ##
   # Destroy node fix for ShadyDOM
