@@ -6,6 +6,16 @@ Meteor.startup ->
   @Polymer.dom = 'shadow'
 
   ##
+  # Defers Blaze.Render until after WebComponentsReady
+  # so that Polymer Icons render correctly
+  # See https://github.com/PolymerElements/iron-icons/issues/14
+  ##
+  ready = new ReactiveVar false
+  window.addEventListener "WebComponentsReady", ->
+    @dispatchEvent new Event('resize') # Manually trigger the resize event
+    ready.set true
+
+  ##
   # Allows use of iron-form by recreating them
   ##
   render = Blaze.render
@@ -27,15 +37,6 @@ Meteor.startup ->
 
         # Replace old form with new form
         oldForm.parentNode.replaceChild(newForm, oldForm)  
-
-  ##
-  # Defers Blaze.Render until after WebComponentsReady
-  # so that Polymer Icons render correctly
-  # See https://github.com/PolymerElements/iron-icons/issues/14
-  ##
-  # ready = new ReactiveVar false
-  # window.addEventListener "WebComponentsReady", ->
-  #   ready.set true
 
   # render = Blaze.render
   # Blaze.render = ->
